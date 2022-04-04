@@ -5,7 +5,8 @@ import android.view.View
 class LoginContract {
     interface View {
         fun setSuccess()
-        fun setError(error: String)
+        fun setNotSuccess()
+        fun showMessage(message: String)
         fun showProgress()
         fun hideProgress()
     }
@@ -14,12 +15,12 @@ class LoginContract {
         fun onAttach(view: LoginContract.View)
         fun onLogin(login: String, password: String)
         fun onRegister(login: String, password: String)
-        fun onForgotLogin()
+        fun onForgotLogin(login: String)
     }
 
     interface Model {
-        fun registerNewCustomer()
-        fun forgotPassword()
-        fun login()
+        fun registerNewUser(login: String, password: String): Boolean
+        fun forgotPassword(login: String): String?
+        fun login(login: String, password: String): Boolean
     }
 }

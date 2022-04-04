@@ -22,26 +22,44 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
         presenter?.onAttach(this)
 
         vb.enterButton.setOnClickListener {
+            Log.d(TAG, "enterButton pressed")
             presenter?.onLogin(vb.loginTv.text.toString(), vb.passwordTv.text.toString())
         }
         vb.registerButton.setOnClickListener {
+            Log.d(TAG, "registerButton pressed")
             presenter?.onRegister(vb.loginTv.text.toString(), vb.passwordTv.text.toString())
         }
         vb.forgotPasswordButton.setOnClickListener {
-            presenter?.onForgotLogin()
+            Log.d(TAG, "forgotPasswordButton pressed")
+            presenter?.onForgotLogin(vb.loginTv.text.toString())
         }
     }
 
     override fun setSuccess() {
-        vb.root.setBackgroundColor(Color.GREEN)
+        vb.forgotPasswordButton.text = "Выйти из сессии"
+        vb.forgotPasswordButton.setOnClickListener {
+            setNotSuccess()
+        }
+
+        vb.authorizationTv.text = "Поздравляем! Вы аторизовались!"
         Toast.makeText(this, "Поздравляем! Вы аторизовались!", Toast.LENGTH_SHORT).show()
     }
 
-    override fun setError(error: String) {
+    override fun setNotSuccess() {
+        vb.forgotPasswordButton.text = "Забыл пароль"
+        vb.forgotPasswordButton.setOnClickListener {
+            Log.d(TAG, "forgotPasswordButton pressed")
+            presenter?.onForgotLogin(vb.loginTv.text.toString())
+        }
+
+        vb.authorizationTv.text = "Введите логин и пароль!"
+    }
+
+    override fun showMessage(message: String) {
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(error)
-            .setMessage("Введите правильные логин и пароль или зарегистрируйтесь!")
+        builder.setTitle(message)
+//            .setMessage("Введите правильные логин и пароль или зарегистрируйтесь!")
             .setPositiveButton("ОК") { dialog, id ->
                 dialog.cancel()
             }
