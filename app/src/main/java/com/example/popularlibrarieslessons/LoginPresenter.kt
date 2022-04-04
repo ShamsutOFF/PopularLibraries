@@ -5,9 +5,6 @@ import android.os.Looper
 import android.util.Log
 import java.lang.Thread.sleep
 
-private const val TAG = "@@@ LoginPresenter"
-
-
 class LoginPresenter : LoginContract.Presenter {
     private var view: LoginContract.View? = null
     private val uiHandler = Handler(Looper.getMainLooper())
@@ -50,11 +47,13 @@ class LoginPresenter : LoginContract.Presenter {
     }
 
     override fun onForgotLogin(login: String) {
-        Log.d(TAG, "onForgotLogin() called with: login = $login")
         val savedPass = usersDataBase?.forgotPassword(login)
-        Log.d(TAG, "onForgotLogin(): savedPass = $savedPass")
         if (savedPass != null) {
             view?.showMessage("Ваш пароль: $savedPass")
         } else view?.showMessage("Такого пользователя не существует!")
+    }
+
+    override fun onLogout() {
+        isSuccess = false
     }
 }

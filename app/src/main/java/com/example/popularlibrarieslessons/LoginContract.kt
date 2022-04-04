@@ -16,6 +16,7 @@ class LoginContract {
         fun onLogin(login: String, password: String)
         fun onRegister(login: String, password: String)
         fun onForgotLogin(login: String)
+        fun onLogout()
     }
 
     interface Model {

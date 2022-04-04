@@ -1,14 +1,10 @@
 package com.example.popularlibrarieslessons
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.popularlibrarieslessons.databinding.ActivityMainBinding
-
-private const val TAG = "@@@ MainActicity"
 
 class MainActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var vb: ActivityMainBinding
@@ -22,16 +18,10 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
         presenter?.onAttach(this)
 
         vb.enterButton.setOnClickListener {
-            Log.d(TAG, "enterButton pressed")
             presenter?.onLogin(vb.loginTv.text.toString(), vb.passwordTv.text.toString())
         }
         vb.registerButton.setOnClickListener {
-            Log.d(TAG, "registerButton pressed")
             presenter?.onRegister(vb.loginTv.text.toString(), vb.passwordTv.text.toString())
-        }
-        vb.forgotPasswordButton.setOnClickListener {
-            Log.d(TAG, "forgotPasswordButton pressed")
-            presenter?.onForgotLogin(vb.loginTv.text.toString())
         }
     }
 
@@ -46,9 +36,9 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun setNotSuccess() {
+        presenter?.onLogout()
         vb.forgotPasswordButton.text = "Забыл пароль"
         vb.forgotPasswordButton.setOnClickListener {
-            Log.d(TAG, "forgotPasswordButton pressed")
             presenter?.onForgotLogin(vb.loginTv.text.toString())
         }
 
@@ -68,13 +58,11 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
 
     private fun initPresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        Log.d(TAG, "initPresenter() called, presenter = $presenter")
         return presenter ?: LoginPresenter()
     }
 
 
     override fun onRetainCustomNonConfigurationInstance(): Any? {
-        Log.d(TAG, "onRetainCustomNonConfigurationInstance() called, presenter = $presenter")
         return presenter
     }
 

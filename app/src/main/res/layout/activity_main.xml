@@ -15,86 +15,92 @@
     app:shimmer_highlight_color="@color/red"
     app:shimmer_shape="radial">
 
-    <LinearLayout
-        android:id="@+id/main_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/default_margin"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
-
-        <EditText
-            android:id="@+id/login_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:autofillHints="login"
-            android:hint="Логин"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size"
-            tools:text="Login" />
-
-        <EditText
-            android:id="@+id/password_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:autofillHints=""
-            android:hint="Пароль"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size"
-            tools:text="Password" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/main_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:padding="@dimen/default_margin">
-
-            <Button
-                android:id="@+id/enter_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:text="@string/enter_text" />
-
-            <Button
-                android:id="@+id/register_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:text="@string/register_text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:padding="@dimen/default_margin">
-
-            <Button
-                android:id="@+id/forgot_password_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:text="@string/forgot_password" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/authorization_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/default_margin"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/login_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:autofillHints="login"
+                android:hint="Логин"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size"
+                tools:text="Login" />
+
+            <EditText
+                android:id="@+id/password_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:autofillHints=""
+                android:hint="Пароль"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size"
+                tools:text="Password" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin">
+
+                <Button
+                    android:id="@+id/enter_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@string/enter_text" />
+
+                <Button
+                    android:id="@+id/register_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@string/register_text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin">
+
+                <Button
+                    android:id="@+id/forgot_password_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@string/forgot_password" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/authorization_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </com.facebook.shimmer.ShimmerFrameLayout>
