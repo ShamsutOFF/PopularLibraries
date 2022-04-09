@@ -2,12 +2,16 @@ package com.example.popularlibrarieslessons.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.example.popularlibrarieslessons.app
+import com.example.popularlibrarieslessons.data.LoginUseCaseImpl
 import com.example.popularlibrarieslessons.databinding.ActivityMainBinding
+import com.example.popularlibrarieslessons.domain.LoginUseCase
 
 private const val TAG = "@@@ MainActivity"
 
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
 
     private fun initPresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter(app.api)
+        return presenter ?: LoginPresenter(app.loginUseCase)
     }
 
 
