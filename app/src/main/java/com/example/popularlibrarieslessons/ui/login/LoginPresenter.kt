@@ -1,23 +1,20 @@
-package com.example.popularlibrarieslessons
+package com.example.popularlibrarieslessons.ui.login
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import java.lang.Thread.sleep
+import com.example.popularlibrarieslessons.domain.LoginApi
 
-class LoginPresenter : LoginContract.Presenter {
+class LoginPresenter(private val api: LoginApi) : LoginContract.Presenter {
     private var view: LoginContract.View? = null
     private val uiHandler = Handler(Looper.getMainLooper())
     private var isSuccess = false
-    private var usersDataBase: LoginContract.Model? = Model()
 
     override fun onAttach(view: LoginContract.View) {
 
         this.view = view
         if (isSuccess) {
             view.setSuccess()
-        }
-        else {
+        } else {
             view.setNotSuccess()
         }
     }
@@ -25,29 +22,40 @@ class LoginPresenter : LoginContract.Presenter {
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
         Thread {
-            sleep(3_000)
             uiHandler.post {
-                view?.hideProgress()
-                if (usersDataBase?.login(login, password) == true) {
+                if (api.login(login, password) == true) {
                     view?.setSuccess()
                     isSuccess = true
+                    view?.hideProgress()
                 } else {
                     view?.showMessage("Неверный пользователь или пароль!")
                     view?.setNotSuccess()
                     isSuccess = false
+                    view?.hideProgress()
                 }
             }
         }.start()
     }
 
     override fun onRegister(login: String, password: String) {
-        if (usersDataBase?.registerNewUser(login, password) == true){
-            view?.showMessage("Пользователь успешно зарегистрирован!")
-        } else view?.showMessage("Пользователь уже существует!")
+        view?.showProgress()
+        Thread {
+            uiHandler.post {
+                if (api.registerNewUser(login, password) == true) {
+                    view?.showMessage("Пользователь успешно зарегистрирован!")
+                    view?.hideProgress()
+                } else {
+                    view?.showMessage("Пользователь уже существует!")
+                    view?.hideProgress()
+                }
+            }
+
+        }.start()
+
     }
 
     override fun onForgotLogin(login: String) {
-        val savedPass = usersDataBase?.forgotPassword(login)
+        val savedPass = api.forgotPassword(login)
         if (savedPass != null) {
             view?.showMessage("Ваш пароль: $savedPass")
         } else view?.showMessage("Такого пользователя не существует!")

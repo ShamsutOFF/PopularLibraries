@@ -1,10 +1,15 @@
-package com.example.popularlibrarieslessons
+package com.example.popularlibrarieslessons.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
+import com.example.popularlibrarieslessons.app
 import com.example.popularlibrarieslessons.databinding.ActivityMainBinding
+
+private const val TAG = "@@@ MainActivity"
 
 class MainActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var vb: ActivityMainBinding
@@ -49,7 +54,6 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle(message)
-//            .setMessage("Введите правильные логин и пароль или зарегистрируйтесь!")
             .setPositiveButton("ОК") { dialog, id ->
                 dialog.cancel()
             }
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
 
     private fun initPresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter()
+        return presenter ?: LoginPresenter(app.api)
     }
 
 
@@ -67,12 +71,13 @@ class MainActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showProgress() {
-        vb.shimmerViewContainer.alpha = 0.7F
-        vb.shimmerViewContainer.startShimmer()
+        Log.d(TAG, "showProgress() called")
+        vb.progressBar.isVisible = true
+
     }
 
     override fun hideProgress() {
-        vb.shimmerViewContainer.alpha = 1F
-        vb.shimmerViewContainer.stopShimmer()
+        Log.d(TAG, "hideProgress() called")
+        vb.progressBar.isVisible = false
     }
 }
