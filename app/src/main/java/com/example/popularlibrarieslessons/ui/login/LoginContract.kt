@@ -1,6 +1,4 @@
-package com.example.popularlibrarieslessons
-
-import android.view.View
+package com.example.popularlibrarieslessons.ui.login
 
 class LoginContract {
     interface View {
@@ -12,16 +10,10 @@ class LoginContract {
     }
 
     interface Presenter {
-        fun onAttach(view: LoginContract.View)
+        fun onAttach(view: View)
         fun onLogin(login: String, password: String)
         fun onRegister(login: String, password: String)
         fun onForgotLogin(login: String)
         fun onLogout()
-    }
-
-    interface Model {
-        fun registerNewUser(login: String, password: String): Boolean
-        fun forgotPassword(login: String): String?
-        fun login(login: String, password: String): Boolean
     }
 }
