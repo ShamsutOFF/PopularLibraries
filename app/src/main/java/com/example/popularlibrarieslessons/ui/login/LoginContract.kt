@@ -1,19 +1,25 @@
 package com.example.popularlibrarieslessons.ui.login
 
-class LoginContract {
-    interface View {
-        fun setSuccess()
-        fun setNotSuccess()
-        fun showMessage(message: String)
-        fun showProgress()
-        fun hideProgress()
-    }
+import androidx.annotation.MainThread
+import com.example.popularlibrarieslessons.utils.Publisher
 
-    interface Presenter {
-        fun onAttach(view: View)
+class LoginContract {
+
+    interface ViewModel {
+        val showProgress: Publisher<Boolean>
+        val isSuccess: Publisher<Boolean>
+        val messageText: Publisher<String?>
+
+        @MainThread
         fun onLogin(login: String, password: String)
+
+        @MainThread
         fun onRegister(login: String, password: String)
+
+        @MainThread
         fun onForgotLogin(login: String)
+
+        @MainThread
         fun onLogout()
     }
 }
